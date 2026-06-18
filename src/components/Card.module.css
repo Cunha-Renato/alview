@@ -1,0 +1,124 @@
+:root {
+	--color-bg-card:    var(--bg1);
+	--color-bg-header:  var(--bg2);
+	--color-bg-footer:  var(--bg);
+	--color-border:     var(--bg3);
+	--color-shadow:     var(--bg-hard);
+	--color-title:      var(--yellow);
+	--color-body:       var(--fg1);
+	--color-label:      var(--gray);
+}
+
+.card {
+	background-color: var(--color-bg-card);
+	border: var(--border-width) solid var(--color-border);
+	box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-shadow);
+	max-width: 480px;
+    min-height: 260px;
+	width: 100%;
+	font-family: var(--font-mono);
+	color: var(--fg);
+	display: flex;
+	flex-direction: column;
+    text-align: justify;
+}
+
+.header {
+    border: none;
+    border-bottom: var(--border-width) solid var(--color-border);
+	background-color: var(--color-bg-header);
+	padding: 10px 16px;
+	color: var(--color-title);
+}
+
+.header:hover {
+    background-color: var(--yellow);
+	color: var(--bg);
+}
+
+.title {
+	margin: 0;
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+    text-align: center;
+}
+
+.description {
+	margin: 0;
+	padding: 5px;
+	font-size: 0.8rem;
+	line-height: 1.6;
+	color: var(--color-body);
+	border-bottom: var(--border-width) solid var(--color-bg-header);
+	flex: 1;
+}
+
+.footer {
+	background-color: var(--color-bg-footer);
+	padding: 5px;
+	display: flex;
+    flex-direction: column;
+	justify-content: space-between;
+	gap: 12px;
+	border-top: var(--border-width) solid var(--color-bg-header);
+}
+
+.sourceLink {
+	font-size: 0.6rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	color: var(--blue);
+	text-decoration: none;
+	white-space: nowrap;
+	flex-shrink: 0;
+	padding-bottom: 2px;
+}
+ 
+.sourceLink:hover {
+	color: var(--fg);
+}
+
+.runtimeSingle {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.runtimeGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.runtimeCell {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.runtimeLabel {
+	font-size: 0.6rem;
+	font-weight: 700;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: var(--color-label);
+}
+
+.badge {
+	display: inline-block;
+	padding: 3px 8px;
+	font-size: 0.78rem;
+	font-weight: 700;
+	border: var(--border-width) solid currentColor;
+	background-color: transparent;
+	white-space: nowrap;
+}
+
+.c1     { color: var(--green);  }
+.cLogN  { color: var(--aqua);   }
+.cN     { color: var(--blue);   }
+.cNLogN { color: var(--yellow); }
+.cN15   { color: var(--yellow); }
+.cN2    { color: var(--red);    }
