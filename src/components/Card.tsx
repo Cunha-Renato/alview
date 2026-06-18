@@ -1,4 +1,5 @@
-import type { AlgoData, ONotation, Runtime } from "../algorithms/data";
+import type { Algorithm } from "../algorithms/algorithm";
+import type { ONotation, Runtime } from "../algorithms/data";
 import styles from "./Card.module.css";
 
 function formatNotation(n: ONotation) {
@@ -50,25 +51,25 @@ function RuntimeDisplay({ runtime }: { runtime: Runtime }) {
   );
 }
 
-export default function Card({ on_click, algo_data }: { on_click: () => void, algo_data: AlgoData }) {
+export default function Card({ on_click, algorithm }: { on_click: () => void, algorithm: Algorithm }) {
   return (
     <article className={styles.card}>
       <button onClick={on_click} type="button" className={styles.header}>
-        <h2 className={styles.title}>{algo_data.algorithm.name()}</h2>
+        <h2 className={styles.title}>{algorithm.name()}</h2>
       </button>
 
-      <p className={styles.description}>{algo_data.description}</p>
+      <p className={styles.description}>{algorithm.description()}</p>
 
       <footer className={styles.footer}>
         <a
           className={styles.sourceLink}
-          href={algo_data.ref}
+          href={algorithm.ref()}
           target="_blank"
           rel="noreferrer"
         >
           SOURCE ↗
         </a>
-        <RuntimeDisplay runtime={algo_data.runtime} />
+        <RuntimeDisplay runtime={algorithm.runtime()} />
       </footer>
     </article>
   );

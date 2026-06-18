@@ -1,9 +1,26 @@
 import { sleep } from "../../utils/sleep";
 import type { Algorithm } from "../algorithm";
+import type { Runtime } from "../data";
 
 export class HeapSort implements Algorithm {
 	name(): string {
 		return "Heap Sort";
+	}
+
+	description(): string {
+		return "Heap Sort is a comparison-based sorting algorithm based on the Binary Heap data structure.";
+	}
+
+	ref(): string {
+		return "https://www.geeksforgeeks.org/dsa/heap-sort/";
+	}
+
+	runtime(): Runtime {
+		return {
+			avarage: "n log n",
+			best: "n log n",
+			worst: "n log n",
+		};
 	}
 
 	async update<T>(

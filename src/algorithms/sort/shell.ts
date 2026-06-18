@@ -1,9 +1,26 @@
 import { sleep } from "../../utils/sleep";
 import type { Algorithm } from "../algorithm";
+import type { Runtime } from "../data";
 
 export class ShellSort implements Algorithm {
 	name(): string {
 		return "Shell Sort";
+	}
+
+	description(): string {
+		return "Shell Sort, also known as Shell's method, is an in-place comparison sort and an optimization of Insertion Sort. It improves upon the efficiency of Insertion Sort by allowing elements to be moved over larger distances in the initial stages, which significantly reduces the number of swaps required, especially for larger datasets.";
+	}
+
+	ref(): string {
+		return "https://www.geeksforgeeks.org/dsa/shell-sort/";
+	}
+
+	runtime(): Runtime {
+		return {
+			avarage: "n¹·⁵",
+			best: "n log n",
+			worst: "n²",
+		};
 	}
 
 	async update<T>(

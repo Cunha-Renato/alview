@@ -1,5 +1,13 @@
+import type { Runtime } from "./data";
+
 export interface Algorithm {
 	name(): string;
+
+	description(): string;
+
+	ref(): string;
+
+	runtime(): Runtime;
 
 	update<T>(
 		data: T[],

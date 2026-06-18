@@ -1,9 +1,26 @@
 import { sleep } from "../../utils/sleep";
 import type { Algorithm } from "../algorithm";
+import type { Runtime } from "../data";
 
 export class QuickSort implements Algorithm {
 	name(): string {
 		return "Quick Sort";
+	}
+
+	description(): string {
+		return "QuickSort is a sorting algorithm based on the Divide and Conquer that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the sorted array.";
+	}
+
+	ref(): string {
+		return "https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/";
+	}
+
+	runtime(): Runtime {
+		return {
+			avarage: "n log n",
+			best: "n log n",
+			worst: "n²",
+		};
 	}
 
 	async update<T>(

@@ -1,9 +1,26 @@
 import { sleep } from "../../utils/sleep";
 import type { Algorithm } from "../algorithm";
+import type { Runtime } from "../data";
 
 export class SelectionSort implements Algorithm {
 	name(): string {
 		return "Selection Sort";
+	}
+
+	description(): string {
+		return "Selection Sort is a comparison-based sorting algorithm. It sorts by repeatedly selecting the smallest (or largest) element from the unsorted portion and swapping it with the first unsorted element.";
+	}
+
+	ref(): string {
+		return "https://www.geeksforgeeks.org/dsa/selection-sort-algorithm-2/";
+	}
+
+	runtime(): Runtime {
+		return {
+			avarage: "n²",
+			best: "n²",
+			worst: "n²",
+		};
 	}
 
 	async update<T>(

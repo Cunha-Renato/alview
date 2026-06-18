@@ -1,5 +1,6 @@
 import { sleep } from "../../utils/sleep";
 import type { Algorithm } from "../algorithm";
+import type { Runtime } from "../data";
 
 type SortCtx<T> = {
 	data: T[];
@@ -11,6 +12,22 @@ type SortCtx<T> = {
 export class MergeSort implements Algorithm {
 	name(): string {
 		return "Merge Sort";
+	}
+
+	description(): string {
+		return "Merge sort is a popular sorting algorithm known for its efficiency and stability. It follows the Divide and Conquer approach. It works by recursively dividing the input array into two halves, recursively sorting the two halves and finally merging them back together to obtain the sorted array.";
+	}
+
+	ref(): string {
+		return "https://www.geeksforgeeks.org/dsa/merge-sort/";
+	}
+
+	runtime(): Runtime {
+		return {
+			avarage: "n log n",
+			best: "n log n",
+			worst: "n log n",
+		};
 	}
 
 	async update<T>(

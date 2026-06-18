@@ -1,9 +1,26 @@
 import { sleep } from "../../utils/sleep";
 import type { Algorithm } from "../algorithm";
+import type { Runtime } from "../data";
 
 export class BubbleSort implements Algorithm {
 	name(): string {
 		return "Bubble Sort";
+	}
+
+	description(): string {
+		return "Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not efficient for large data sets as its average and worst-case time complexity are quite high.";
+	}
+
+	ref(): string {
+		return "https://www.geeksforgeeks.org/dsa/bubble-sort-algorithm/";
+	}
+
+	runtime(): Runtime {
+		return {
+			avarage: "n²",
+			best: "n²",
+			worst: "n²",
+		};
 	}
 
 	async update<T>(
