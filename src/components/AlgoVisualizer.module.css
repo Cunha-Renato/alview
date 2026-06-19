@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 400px;
+}
+
+.idle {
+    background-color: var(--bg3);
+}
+
+.completed {
+    background-color: var(--aqua);
+}
+
+.current {
+    background-color: var(--red);
+}
+
+.compare {
+    background-color: var(--yellow);
+}
