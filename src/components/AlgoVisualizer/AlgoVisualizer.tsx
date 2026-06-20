@@ -1,7 +1,6 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import { type Algorithm, PauseController, type Scenario, gen_array } from "../../algorithms/algorithm";
 import styles from "./AlgoVisualizer.module.css";
-import { BadgeWithTitle } from "../Badge/Badge";
 
 class VisualizerState {
   bars: number[];
