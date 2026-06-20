@@ -38,6 +38,8 @@ export default function SortPageAlgo() {
   const algorithm = SORT_DATA[id_int];
 
   const change_algo = (add: number) => {
+    setPause(true);
+
     let next = (id_int + add);
     if (next < 0) {
       next += SORT_DATA.length;

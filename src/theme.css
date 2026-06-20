@@ -24,6 +24,8 @@
 
 	--border-width:  2px;
 	--shadow-offset: 5px;
+
+    background-color: var(--bg);
 }
 
 *, *::before, *::after {

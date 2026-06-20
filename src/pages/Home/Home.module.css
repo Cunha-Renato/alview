@@ -1,0 +1,164 @@
+.markdown {
+	font-family: var(--font-mono);
+	color: var(--fg1);
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 48px 40px;
+	line-height: 1.7;
+}
+
+.markdown h1 {
+	font-size: 1.8rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--yellow);
+	border-bottom: 3px solid var(--bg3);
+	padding-bottom: 12px;
+	margin: 0 0 24px;
+}
+
+.markdown h2 {
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: var(--orange);
+	border-bottom: 2px solid var(--bg2);
+	padding-bottom: 8px;
+	margin: 36px 0 16px;
+}
+
+.markdown h3 {
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--aqua);
+	margin: 28px 0 12px;
+}
+
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--fg);
+	margin: 20px 0 10px;
+}
+
+.markdown p {
+	margin: 0 0 16px;
+	font-size: 0.9rem;
+}
+
+.markdown strong {
+	color: var(--fg);
+	font-weight: 700;
+}
+
+.markdown em {
+	color: var(--fg);
+	font-style: italic;
+}
+
+.markdown a {
+	color: var(--blue);
+	text-decoration: none;
+	border-bottom: 1px solid var(--blue);
+}
+
+.markdown a:hover {
+	color: var(--yellow);
+	border-color: var(--yellow);
+}
+
+.markdown ul,
+.markdown ol {
+	margin: 0 0 16px;
+	padding-left: 28px;
+}
+
+.markdown li {
+	margin-bottom: 6px;
+	font-size: 0.9rem;
+}
+
+.markdown li::marker {
+	color: var(--orange);
+}
+
+.markdown input[type="checkbox"] {
+	accent-color: var(--yellow);
+	margin-right: 8px;
+}
+
+.markdown code {
+	font-family: var(--font-mono);
+	font-size: 0.85em;
+	color: var(--green);
+	background-color: var(--bg1);
+	border: 1px solid var(--bg3);
+	padding: 2px 6px;
+}
+
+.markdown pre {
+	background-color: var(--bg1);
+	border: 2px solid var(--bg3);
+	box-shadow: 4px 4px 0 var(--bg-hard);
+	padding: 16px;
+	overflow-x: auto;
+	margin: 0 0 20px;
+}
+
+.markdown pre code {
+	background: none;
+	border: none;
+	padding: 0;
+	color: var(--fg1);
+}
+
+.markdown blockquote {
+	margin: 0 0 16px;
+	padding: 8px 16px;
+	border-left: 4px solid var(--orange);
+	background-color: var(--bg1);
+	color: var(--gray);
+}
+
+.markdown blockquote p {
+	margin: 0;
+}
+
+.markdown table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0 0 20px;
+	font-size: 0.85rem;
+}
+
+.markdown th,
+.markdown td {
+	border: 2px solid var(--bg3);
+	padding: 8px 12px;
+	text-align: left;
+}
+
+.markdown th {
+	background-color: var(--bg2);
+	color: var(--yellow);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	font-size: 0.75rem;
+}
+
+.markdown tr:nth-child(even) td {
+	background-color: var(--bg1);
+}
+
+.markdown hr {
+	border: none;
+	border-top: 2px solid var(--bg3);
+	margin: 32px 0;
+}
+
+.markdown img {
+	max-width: 100%;
+	border: 2px solid var(--bg3);
+}

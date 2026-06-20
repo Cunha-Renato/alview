@@ -7,8 +7,11 @@ export default function CardGrid({ search_term, on_select, algo_data }: { search
     <div className={styles.grid}>
       {
         algo_data
-          .filter(algorithm => algorithm.name().toLowerCase().includes(search_term.toLowerCase()))
-          .map((algorithm, idx) => <Card on_click={() => on_select(idx)} key={algorithm.name()} algorithm={algorithm} />)
+          .map((algorithm, idx) => ({ algorithm, idx }))
+          .filter(({ algorithm }) => algorithm.name().toLowerCase().includes(search_term.toLowerCase()))
+          .map(({ algorithm, idx }) => (
+            <Card on_click={() => on_select(idx)} key={algorithm.name()} algorithm={algorithm} />
+          ))
       }
     </div>
   );
