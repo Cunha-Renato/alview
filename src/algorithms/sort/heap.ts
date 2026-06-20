@@ -1,5 +1,5 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 export class HeapSort implements Algorithm {
@@ -26,6 +26,7 @@ export class HeapSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -37,6 +38,7 @@ export class HeapSort implements Algorithm {
 			await this.heapify(
 				data,
 				delay,
+				pause,
 				on_current,
 				on_compare,
 				on_success,
@@ -53,6 +55,7 @@ export class HeapSort implements Algorithm {
 			await this.heapify(
 				data,
 				delay,
+				pause,
 				on_current,
 				on_compare,
 				on_success,
@@ -69,6 +72,7 @@ export class HeapSort implements Algorithm {
 	async heapify<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -76,6 +80,8 @@ export class HeapSort implements Algorithm {
 		n: number,
 		i: number,
 	) {
+		await pause.wait();
+
 		let largest = i;
 		const left = 2 * i + 1;
 		const right = 2 * i + 2;
@@ -96,6 +102,7 @@ export class HeapSort implements Algorithm {
 			await this.heapify(
 				data,
 				delay,
+				pause,
 				on_current,
 				on_compare,
 				on_success,

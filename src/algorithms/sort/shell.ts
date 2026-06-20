@@ -1,5 +1,5 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 export class ShellSort implements Algorithm {
@@ -26,6 +26,7 @@ export class ShellSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -35,12 +36,16 @@ export class ShellSort implements Algorithm {
 
 		for (let gap = Math.floor(len / 2); gap > 0; gap = Math.floor(gap / 2)) {
 			for (let i = gap; i < len; i++) {
+				await pause.wait();
+
 				const tmp = data[i];
 				let j = i;
 
 				on_current(i);
 
 				while (j >= gap && data[j - gap] > tmp) {
+					await pause.wait();
+
 					on_compare(j - gap);
 					await sleep(delay.current);
 

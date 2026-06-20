@@ -1,5 +1,5 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 export class InsertionSort implements Algorithm {
@@ -26,6 +26,7 @@ export class InsertionSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -39,6 +40,8 @@ export class InsertionSort implements Algorithm {
 			let j = i - 1;
 
 			while (j >= 0 && data[j] > key) {
+				await pause.wait();
+
 				on_compare(j);
 				await sleep(delay.current);
 

@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from "react";
-import { type Algorithm, type Scenario, gen_array } from "../../algorithms/algorithm";
+import { type Algorithm, PauseController, type Scenario, gen_array } from "../../algorithms/algorithm";
 import styles from "./AlgoVisualizer.module.css";
 
 class VisualizerState {
@@ -7,7 +7,6 @@ class VisualizerState {
   completed: Set<number>;
   current: number;
   compare: number;
-  done: boolean;
   algorithm: Algorithm;
 
   constructor(algorithm: Algorithm) {
@@ -15,14 +14,14 @@ class VisualizerState {
     this.completed = new Set();
     this.current = -1;
     this.compare = -1;
-    this.done = false;
     this.algorithm = algorithm;
   }
 
-  update(delay: React.RefObject<number>, force_render: () => void) {
+  update(delay: React.RefObject<number>, pause: PauseController, force_render: () => void) {
     this.algorithm.update(
       this.bars,
       delay,
+      pause,
       (idx) => {
         this.current = idx;
         force_render()
@@ -47,11 +46,13 @@ interface SortVisualizerProps {
   algorithm: Algorithm;
   scenario: Scenario
   delay: number;
+  pause: boolean;
   amount: number;
   max_value: number;
+  reset_token: boolean,
 };
 
-export default function SortVisualizer({ algorithm, scenario, delay, amount, max_value }: SortVisualizerProps) {
+export default function SortVisualizer({ algorithm, scenario, delay, pause, amount, max_value, reset_token }: SortVisualizerProps) {
   const [, force_render] = useReducer((x) => x + 1, 0);
   const [state, setState] = useState(new VisualizerState(algorithm));
 
@@ -60,16 +61,26 @@ export default function SortVisualizer({ algorithm, scenario, delay, amount, max
     delay_ref.current = delay;
   }, [delay]);
 
+  const pause_ref = useRef(new PauseController());
+  useEffect(() => {
+    if (pause) {
+      pause_ref.current.pause();
+    } else {
+      pause_ref.current.resume();
+    }
+  }, [pause]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: SHUT UP, reset_token intentionally triggers effect re-run without being read.
   useEffect(() => {
     const new_state = new VisualizerState(algorithm);
     new_state.bars = gen_array(scenario, amount, max_value);
 
     setState(new_state);
-  }, [algorithm, scenario, amount, max_value]);
+  }, [algorithm, scenario, amount, max_value, reset_token]); // <- This guy.
 
   useEffect(() => {
     const controller = new AbortController();
-    state.update(delay_ref, () => force_render());
+    state.update(delay_ref, pause_ref.current, () => force_render());
     return () => controller.abort();
   }, [state]);
 

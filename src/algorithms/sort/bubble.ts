@@ -1,5 +1,5 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 export class BubbleSort implements Algorithm {
@@ -26,6 +26,7 @@ export class BubbleSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -35,6 +36,8 @@ export class BubbleSort implements Algorithm {
 
 		for (let i = 0; i < len - 1; i++) {
 			for (let j = 0; j < len - i - 1; j++) {
+				await pause.wait();
+
 				on_current(j);
 				on_compare(j + 1);
 				await sleep(delay.current);

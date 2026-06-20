@@ -1,5 +1,5 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 export class SelectionSort implements Algorithm {
@@ -26,6 +26,7 @@ export class SelectionSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -37,6 +38,8 @@ export class SelectionSort implements Algorithm {
 			let min_idx = i;
 
 			for (let j = i + 1; j < len; j++) {
+				await pause.wait();
+
 				on_current(min_idx);
 				on_compare(j);
 				await sleep(delay.current);

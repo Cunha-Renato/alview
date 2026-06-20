@@ -12,6 +12,7 @@ export interface Algorithm {
 	update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -48,5 +49,36 @@ export function gen_array(
 			}
 
 			return arr;
+	}
+}
+
+export class PauseController {
+	private paused = true;
+	private resolve: (() => void) | null = null;
+
+	get isPaused() {
+		return this.paused;
+	}
+
+	pause() {
+		this.paused = true;
+	}
+
+	resume() {
+		this.paused = false;
+		this.resolve?.();
+		this.resolve = null;
+	}
+
+	toggle() {
+		if (this.paused) this.resume();
+		else this.pause();
+	}
+
+	wait(): Promise<void> {
+		if (!this.paused) return Promise.resolve();
+		return new Promise((resolve) => {
+			this.resolve = resolve;
+		});
 	}
 }

@@ -1,10 +1,11 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 type SortCtx<T> = {
 	data: T[];
 	delay: React.RefObject<number>;
+	pause: PauseController;
 	on_current: (idx: number) => void;
 	on_change: (data: T[]) => void;
 };
@@ -33,6 +34,7 @@ export class MergeSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		_: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -41,6 +43,7 @@ export class MergeSort implements Algorithm {
 		const ctx: SortCtx<T> = {
 			data,
 			delay,
+			pause,
 			on_current,
 			on_change,
 		};
@@ -73,7 +76,7 @@ export class MergeSort implements Algorithm {
 		mid: number,
 		right: number,
 	): Promise<void> {
-		const { data, delay, on_current, on_change } = ctx;
+		const { data, delay, pause, on_current, on_change } = ctx;
 
 		const arr_left = data.slice(left, mid + 1);
 		const arr_right = data.slice(mid + 1, right + 1);
@@ -83,6 +86,8 @@ export class MergeSort implements Algorithm {
 			k = left;
 
 		while (i < arr_left.length && j < arr_right.length) {
+			await pause.wait();
+
 			on_current(k);
 			await sleep(delay.current);
 
@@ -98,6 +103,8 @@ export class MergeSort implements Algorithm {
 		}
 
 		while (i < arr_left.length) {
+			await pause.wait();
+
 			on_current(k);
 			data[k] = arr_left[i++];
 
@@ -107,6 +114,8 @@ export class MergeSort implements Algorithm {
 		}
 
 		while (j < arr_right.length) {
+			await pause.wait();
+
 			on_current(k);
 			data[k] = arr_right[j++];
 			on_change(data);

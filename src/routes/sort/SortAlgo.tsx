@@ -1,16 +1,20 @@
-import { useParams, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import Page from "../Page";
 import { SORT_DATA } from "../../algorithms/data";
 import SortVisualizer from "../../components/AlgoVisualizer/AlgoVisualizer";
 import RuntimeDisplay from "../../components/RuntimeDisplay/RuntimeDisplay";
 import styles from "./SortAlgo.module.css"
 import { useState } from "react";
-import { type Scenario } from "../../algorithms/algorithm";
+import type { Scenario } from "../../algorithms/algorithm";
 import Badge, { BadgeWithTitle } from "../../components/Badge/Badge";
 
 export default function SortPageAlgo() {
-  const [scenario, setScenario] = useState<Scenario>("Average Case")
+  const scenarios: Scenario[] = ["Best Case", "Average Case", "Worst Case"]
+  const [scenario, setScenario] = useState<Scenario>(scenarios[1])
   const [delay, setDelay] = useState(100);
+  const [pause, setPause] = useState(true);
+  // The value here doesn't matter, this is just to trigger a 'refresh' on the visualizer
+  const [reset_token, setResetToken] = useState(false);
   const [amount, setAmount] = useState(100);
   const [max_value, setMaxValue] = useState(100);
 
@@ -75,10 +79,12 @@ export default function SortPageAlgo() {
       header={
         < SortVisualizer
           algorithm={algorithm}
-          scenario="Average Case"
+          scenario={scenario}
           delay={delay}
+          pause={pause}
           amount={amount}
           max_value={max_value}
+          reset_token={reset_token}
         />
       }
       section={
@@ -91,7 +97,7 @@ export default function SortPageAlgo() {
               value={delay}
               onChange={(e) => setDelay(Number(e.target.value))}
             >
-              {[5, 10, 50, 100, 250, 500, 1000].map((n) => (
+              {[1, 5, 10, 50, 100, 250, 500, 1000].map((n) => (
                 <option key={n} value={n}>{n}</option>
               ))}
             </select>
@@ -120,7 +126,41 @@ export default function SortPageAlgo() {
               ))}
             </select>
           </BadgeWithTitle>
-        </div >
+
+          <BadgeWithTitle className={styles.select_badge} title="Scenario">
+            <select
+              className={styles.select}
+              value={scenario}
+              onChange={(e) => {
+                setScenario(e.target.value as Scenario)
+              }}
+            >
+              {scenarios.map((n) => (
+                <option key={n} value={n}>{n}</option>
+              ))}
+            </select>
+          </BadgeWithTitle>
+
+          <BadgeWithTitle className={styles.select_badge} title={pause ? "Play" : "Pause"} >
+            <button
+              type="button"
+              className={styles.select}
+              onClick={() => setPause(value => !value)}
+            >
+              {pause ? "▶" : "⏸"}
+            </button>
+          </BadgeWithTitle>
+
+          <BadgeWithTitle className={styles.select_badge} title="Reset" >
+            <button
+              type="button"
+              className={styles.select}
+              onClick={() => setResetToken(value => !value)}
+            >
+              ⭮
+            </button>
+          </BadgeWithTitle>
+        </ div >
       }
     />
   );

@@ -2,7 +2,7 @@ import styles from "./Page.module.css";
 
 export interface PageProps {
   ref: string | null,
-  title: React.JSX.Element,
+  title: React.JSX.Element | string,
   header: React.JSX.Element,
   section: React.JSX.Element,
 }

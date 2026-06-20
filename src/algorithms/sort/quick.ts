@@ -1,5 +1,5 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm } from "../algorithm";
+import type { Algorithm, PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
 export class QuickSort implements Algorithm {
@@ -26,6 +26,7 @@ export class QuickSort implements Algorithm {
 	async update<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -34,6 +35,7 @@ export class QuickSort implements Algorithm {
 		await this.quick(
 			data,
 			delay,
+			pause,
 			on_current,
 			on_compare,
 			on_success,
@@ -43,7 +45,7 @@ export class QuickSort implements Algorithm {
 		);
 
 		for (let i = 0; i < data.length; i++) {
-			await sleep(50);
+			await sleep(2);
 			on_success(i);
 		}
 	}
@@ -51,6 +53,7 @@ export class QuickSort implements Algorithm {
 	async quick<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -58,10 +61,13 @@ export class QuickSort implements Algorithm {
 		left: number,
 		right: number,
 	) {
+		await pause.wait();
+
 		if (left < right) {
 			const pivot_index = await this.partition(
 				data,
 				delay,
+				pause,
 				on_current,
 				on_compare,
 				on_success,
@@ -73,6 +79,7 @@ export class QuickSort implements Algorithm {
 			await this.quick(
 				data,
 				delay,
+				pause,
 				on_current,
 				on_compare,
 				on_success,
@@ -84,6 +91,7 @@ export class QuickSort implements Algorithm {
 			await this.quick(
 				data,
 				delay,
+				pause,
 				on_current,
 				on_compare,
 				on_success,
@@ -97,6 +105,7 @@ export class QuickSort implements Algorithm {
 	async partition<T>(
 		data: T[],
 		delay: React.RefObject<number>,
+		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -108,6 +117,8 @@ export class QuickSort implements Algorithm {
 		let i = left - 1;
 
 		for (let j = left; j <= right - 1; j++) {
+			await pause.wait();
+
 			on_current(pivot);
 			on_compare(j);
 			await sleep(delay.current);
