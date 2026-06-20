@@ -9,7 +9,7 @@ export abstract class Algorithm {
 
 	abstract runtime(): Runtime;
 
-	set_target(target: React.RefObject<number>): void {
+	set_target(_target: React.RefObject<number>): void {
 		return;
 	}
 
