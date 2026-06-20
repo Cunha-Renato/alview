@@ -1,8 +1,8 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm, PauseController } from "../algorithm";
+import { Algorithm, type PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
-export class QuickSort implements Algorithm {
+export class QuickSort extends Algorithm {
 	name(): string {
 		return "Quick Sort";
 	}
@@ -23,14 +23,14 @@ export class QuickSort implements Algorithm {
 		};
 	}
 
-	async update<T>(
-		data: T[],
+	async update(
+		data: number[],
 		delay: React.RefObject<number>,
 		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
-		on_change: (data: T[]) => void,
+		on_change: (data: number[]) => void,
 	): Promise<void> {
 		await this.quick(
 			data,
@@ -50,14 +50,14 @@ export class QuickSort implements Algorithm {
 		}
 	}
 
-	async quick<T>(
-		data: T[],
+	async quick(
+		data: number[],
 		delay: React.RefObject<number>,
 		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
-		on_change: (data: T[]) => void,
+		on_change: (data: number[]) => void,
 		left: number,
 		right: number,
 	) {
@@ -102,14 +102,14 @@ export class QuickSort implements Algorithm {
 		}
 	}
 
-	async partition<T>(
-		data: T[],
+	async partition(
+		data: number[],
 		delay: React.RefObject<number>,
 		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
-		on_change: (data: T[]) => void,
+		on_change: (data: number[]) => void,
 		left: number,
 		right: number,
 	): Promise<number> {

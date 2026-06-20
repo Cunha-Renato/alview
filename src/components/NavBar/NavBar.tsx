@@ -4,6 +4,7 @@ import styles from "./NavBar.module.css"
 const LINKS = [
   { label: "Home", to: "/" },
   { label: "Sorting", to: "/sort" },
+  { label: "Searching", to: "/search" },
 ];
 
 export default function Navbar() {

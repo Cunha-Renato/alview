@@ -1,22 +1,26 @@
 import type { Runtime } from "./data";
 
-export interface Algorithm {
-	name(): string;
+export abstract class Algorithm {
+	abstract name(): string;
 
-	description(): string;
+	abstract description(): string;
 
-	ref(): string;
+	abstract ref(): string;
 
-	runtime(): Runtime;
+	abstract runtime(): Runtime;
 
-	update<T>(
-		data: T[],
+	set_target(target: React.RefObject<number>): void {
+		return;
+	}
+
+	abstract update(
+		data: number[],
 		delay: React.RefObject<number>,
 		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
-		on_change: (data: T[]) => void,
+		on_change: (data: number[]) => void,
 	): Promise<void>;
 }
 

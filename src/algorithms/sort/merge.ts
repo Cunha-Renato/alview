@@ -1,16 +1,16 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm, PauseController } from "../algorithm";
+import { Algorithm, type PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
-type SortCtx<T> = {
-	data: T[];
+type SortCtx = {
+	data: number[];
 	delay: React.RefObject<number>;
 	pause: PauseController;
 	on_current: (idx: number) => void;
-	on_change: (data: T[]) => void;
+	on_change: (data: number[]) => void;
 };
 
-export class MergeSort implements Algorithm {
+export class MergeSort extends Algorithm {
 	name(): string {
 		return "Merge Sort";
 	}
@@ -31,16 +31,16 @@ export class MergeSort implements Algorithm {
 		};
 	}
 
-	async update<T>(
-		data: T[],
+	async update(
+		data: number[],
 		delay: React.RefObject<number>,
 		pause: PauseController,
 		on_current: (idx: number) => void,
 		_: (idx: number) => void,
 		on_success: (idx: number) => void,
-		on_change: (data: T[]) => void,
+		on_change: (data: number[]) => void,
 	): Promise<void> {
-		const ctx: SortCtx<T> = {
+		const ctx: SortCtx = {
 			data,
 			delay,
 			pause,
@@ -56,11 +56,7 @@ export class MergeSort implements Algorithm {
 		}
 	}
 
-	async merge_sort<T>(
-		ctx: SortCtx<T>,
-		left: number,
-		right: number,
-	): Promise<void> {
+	async merge_sort(ctx: SortCtx, left: number, right: number): Promise<void> {
 		if (left >= right) return;
 
 		const mid = Math.floor(left + (right - left) / 2);
@@ -70,8 +66,8 @@ export class MergeSort implements Algorithm {
 		await this.merge(ctx, left, mid, right);
 	}
 
-	async merge<T>(
-		ctx: SortCtx<T>,
+	async merge(
+		ctx: SortCtx,
 		left: number,
 		mid: number,
 		right: number,

@@ -1,8 +1,8 @@
 import { sleep } from "../../utils/sleep";
-import type { Algorithm, PauseController } from "../algorithm";
+import { Algorithm, type PauseController } from "../algorithm";
 import type { Runtime } from "../data";
 
-export class InsertionSort implements Algorithm {
+export class InsertionSort extends Algorithm {
 	name(): string {
 		return "Insertion Sort";
 	}
@@ -23,14 +23,14 @@ export class InsertionSort implements Algorithm {
 		};
 	}
 
-	async update<T>(
-		data: T[],
+	async update(
+		data: number[],
 		delay: React.RefObject<number>,
 		pause: PauseController,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
-		on_change: (data: T[]) => void,
+		on_change: (data: number[]) => void,
 	): Promise<void> {
 		const len = data.length;
 

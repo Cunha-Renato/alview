@@ -1,16 +1,15 @@
+
 import { useSearchParams } from "react-router-dom"
 import Page from "../Page";
-import { SORT_DATA } from "../../algorithms/data";
-import { SortVisualizer } from "../../components/AlgoVisualizer/AlgoVisualizer";
+import { SEARCH_DATA } from "../../algorithms/data";
+import { SearchVisualizer } from "../../components/AlgoVisualizer/AlgoVisualizer";
 import RuntimeDisplay from "../../components/RuntimeDisplay/RuntimeDisplay";
-import styles from "./SortAlgo.module.css"
+import styles from "./SearchAlgo.module.css"
 import { useState } from "react";
-import type { Scenario } from "../../algorithms/algorithm";
 import Badge, { BadgeWithTitle } from "../../components/Badge/Badge";
+import { BinarySearch } from "../../algorithms/search/binary";
 
-export default function SortPageAlgo() {
-  const scenarios: Scenario[] = ["Best Case", "Average Case", "Worst Case"]
-  const [scenario, setScenario] = useState<Scenario>(scenarios[1])
+export default function SearchPageAlgo() {
   const [delay, setDelay] = useState(100);
   const [pause, setPause] = useState(true);
   // The value here doesn't matter, this is just to trigger a 'refresh' on the visualizer
@@ -30,22 +29,22 @@ export default function SortPageAlgo() {
 
   if (id === null) {
     return invalid_id_page;
-  } else if (parseInt(id, 10) < 0 || parseInt(id, 10) > SORT_DATA.length - 1) {
+  } else if (parseInt(id, 10) < 0 || parseInt(id, 10) > SEARCH_DATA.length - 1) {
     return invalid_id_page;
   }
 
   const id_int = parseInt(id, 10);
-  const algorithm = SORT_DATA[id_int];
+  const algorithm = SEARCH_DATA[id_int];
 
   const change_algo = (add: number) => {
     setPause(true);
 
     let next = (id_int + add);
     if (next < 0) {
-      next += SORT_DATA.length;
+      next += SEARCH_DATA.length;
     }
 
-    const new_idx = next % SORT_DATA.length;
+    const new_idx = next % SEARCH_DATA.length;
     setSearchParams({ id: new_idx.toString() })
   };
 
@@ -79,9 +78,9 @@ export default function SortPageAlgo() {
         </div>
       }
       header={
-        < SortVisualizer
+        < SearchVisualizer
           algorithm={algorithm}
-          scenario={scenario}
+          scenario={SEARCH_DATA[id_int].name() === new BinarySearch().name() ? "Best Case" : "Average Case"}
           delay={delay}
           pause={pause}
           amount={amount}
@@ -129,20 +128,6 @@ export default function SortPageAlgo() {
             </select>
           </BadgeWithTitle>
 
-          <BadgeWithTitle className={styles.select_badge} title="Scenario">
-            <select
-              className={styles.select}
-              value={scenario}
-              onChange={(e) => {
-                setScenario(e.target.value as Scenario)
-              }}
-            >
-              {scenarios.map((n) => (
-                <option key={n} value={n}>{n}</option>
-              ))}
-            </select>
-          </BadgeWithTitle>
-
           <BadgeWithTitle className={styles.select_badge} title={pause ? "Play" : "Pause"} >
             <button
               type="button"
@@ -162,6 +147,8 @@ export default function SortPageAlgo() {
               ⭮
             </button>
           </BadgeWithTitle>
+
+          Please Select A Value to Search
         </ div >
       }
     />

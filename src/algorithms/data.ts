@@ -1,4 +1,6 @@
 import type { Algorithm } from "./algorithm";
+import { BinarySearch } from "./search/binary";
+import { LinearSearch } from "./search/linear";
 import { BubbleSort } from "./sort/bubble";
 import { HeapSort } from "./sort/heap";
 import { InsertionSort } from "./sort/insertion";
@@ -27,4 +29,9 @@ export const SORT_DATA: Algorithm[] = [
 	new HeapSort(),
 	new MergeSort(),
 	new ShellSort(),
+];
+
+export const SEARCH_DATA: Algorithm[] = [
+	new LinearSearch(),
+	new BinarySearch(),
 ];

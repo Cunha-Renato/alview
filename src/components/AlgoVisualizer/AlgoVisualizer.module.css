@@ -20,3 +20,25 @@
 .compare {
     background-color: var(--yellow);
 }
+
+.hoverable {
+    appearance: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+}
+
+.hoverable:hover {
+    background-color: var(--blue);
+    cursor: pointer;
+}
+
+.search_badge {
+    min-width: 36px;
+    height: 23px;
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
+    font: var(--font-mono);
+}

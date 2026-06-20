@@ -2,24 +2,21 @@ import { useState } from "react";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import Search from "../../components/Search";
 import { useNavigate } from "react-router-dom";
-import styles from "./Sort.module.css";
-import { SORT_DATA } from "../../algorithms/data";
+import styles from "./AlgosInfo.module.css";
 import Page from "../Page";
+import type { AlgoTypePageData } from "./Algos";
 
-export default function SortPage() {
+export default function AlgosInfoPage({ algo_type }: { algo_type: AlgoTypePageData }) {
   const [search_term, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   return (
     <Page
-      title="Sorting Algorithms"
-      ref="https://www.geeksforgeeks.org/dsa/sorting-algorithms/"
+      title={algo_type.title}
+      ref={algo_type.ref}
       header={
         <p className={styles.description}>
-          A Sorting Algorithm is used to rearrange a given array or list of
-          elements in an order. For example, a given array [10, 20, 5, 2]
-          becomes [2, 5, 10, 20] after sorting in increasing order and becomes
-          [20, 10, 5, 2] after sorting in decreasing order.
+          {algo_type.description}
         </p>
       }
       section={
@@ -34,9 +31,9 @@ export default function SortPage() {
             />
           </div>
           <CardGrid
-            on_select={(idx) => navigate(`/sort/visualize?id=${idx}`)}
+            on_select={(idx) => navigate(`visualize?id=${idx}`)}
             search_term={search_term}
-            algo_data={SORT_DATA}
+            algo_data={algo_type.data}
           />
         </>
       }
