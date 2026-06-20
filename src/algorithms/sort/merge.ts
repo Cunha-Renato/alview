@@ -4,7 +4,7 @@ import type { Runtime } from "../data";
 
 type SortCtx<T> = {
 	data: T[];
-	delay: number;
+	delay: React.RefObject<number>;
 	on_current: (idx: number) => void;
 	on_change: (data: T[]) => void;
 };
@@ -24,7 +24,7 @@ export class MergeSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n log n",
+			average: "n log n",
 			best: "n log n",
 			worst: "n log n",
 		};
@@ -32,7 +32,7 @@ export class MergeSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		_: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -84,7 +84,7 @@ export class MergeSort implements Algorithm {
 
 		while (i < arr_left.length && j < arr_right.length) {
 			on_current(k);
-			await sleep(delay);
+			await sleep(delay.current);
 
 			if (arr_left[i] <= arr_right[j]) {
 				data[k] = arr_left[i++];

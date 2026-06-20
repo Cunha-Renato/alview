@@ -17,7 +17,7 @@ export class BubbleSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n²",
+			average: "n²",
 			best: "n²",
 			worst: "n²",
 		};
@@ -25,7 +25,7 @@ export class BubbleSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -37,10 +37,10 @@ export class BubbleSort implements Algorithm {
 			for (let j = 0; j < len - i - 1; j++) {
 				on_current(j);
 				on_compare(j + 1);
-				await sleep(delay);
+				await sleep(delay.current);
 
 				if (data[j] > data[j + 1]) {
-					await sleep(delay);
+					await sleep(delay.current);
 					[data[j], data[j + 1]] = [data[j + 1], data[j]];
 
 					on_change(data);

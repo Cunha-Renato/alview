@@ -17,7 +17,7 @@ export class HeapSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n log n",
+			average: "n log n",
 			best: "n log n",
 			worst: "n log n",
 		};
@@ -25,7 +25,7 @@ export class HeapSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -68,7 +68,7 @@ export class HeapSort implements Algorithm {
 
 	async heapify<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -86,7 +86,7 @@ export class HeapSort implements Algorithm {
 		if (right < n && data[right] > data[largest]) largest = right;
 
 		on_compare(largest);
-		await sleep(delay);
+		await sleep(delay.current);
 
 		if (largest !== i) {
 			[data[i], data[largest]] = [data[largest], data[i]];

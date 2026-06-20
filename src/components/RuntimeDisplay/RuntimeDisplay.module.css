@@ -1,0 +1,18 @@
+.runtime_single {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.runtime_grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.c1     { color: var(--green);  }
+.cLogN  { color: var(--aqua);   }
+.cN     { color: var(--blue);   }
+.cNLogN { color: var(--yellow); }
+.cN15   { color: var(--yellow); }
+.cN2    { color: var(--red);    }

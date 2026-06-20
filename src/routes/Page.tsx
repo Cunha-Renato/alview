@@ -1,8 +1,8 @@
 import styles from "./Page.module.css";
 
 export interface PageProps {
-  title: string,
   ref: string | null,
+  title: React.JSX.Element,
   header: React.JSX.Element,
   section: React.JSX.Element,
 }
@@ -14,7 +14,7 @@ export default function Page(
     <main className={styles.page}>
       <header className={styles.hero}>
         <div className={styles.hero_top}>
-          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.title}>{title}</div>
           {ref &&
             <a
               className={styles.sourceLink}

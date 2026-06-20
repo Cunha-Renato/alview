@@ -11,7 +11,7 @@ export type ONotation = "n²" | "n¹·⁵" | "n" | "n log n" | "log n" | "1";
 
 export type Runtime =
 	| {
-			avarage: ONotation;
+			average: ONotation;
 			best: ONotation;
 			worst: ONotation;
 	  }

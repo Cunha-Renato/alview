@@ -17,7 +17,7 @@ export class QuickSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n log n",
+			average: "n log n",
 			best: "n log n",
 			worst: "n²",
 		};
@@ -25,7 +25,7 @@ export class QuickSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -50,7 +50,7 @@ export class QuickSort implements Algorithm {
 
 	async quick<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -96,7 +96,7 @@ export class QuickSort implements Algorithm {
 
 	async partition<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -110,7 +110,7 @@ export class QuickSort implements Algorithm {
 		for (let j = left; j <= right - 1; j++) {
 			on_current(pivot);
 			on_compare(j);
-			await sleep(delay);
+			await sleep(delay.current);
 
 			if (data[j] < data[pivot]) {
 				i++;

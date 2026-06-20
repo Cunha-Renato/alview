@@ -11,7 +11,7 @@ export interface Algorithm {
 
 	update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,

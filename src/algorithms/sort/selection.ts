@@ -17,7 +17,7 @@ export class SelectionSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n²",
+			average: "n²",
 			best: "n²",
 			worst: "n²",
 		};
@@ -25,7 +25,7 @@ export class SelectionSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -39,7 +39,7 @@ export class SelectionSort implements Algorithm {
 			for (let j = i + 1; j < len; j++) {
 				on_current(min_idx);
 				on_compare(j);
-				await sleep(delay);
+				await sleep(delay.current);
 
 				if (data[j] < data[min_idx]) {
 					min_idx = j;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CardGrid from "../../components/CardGrid";
+import CardGrid from "../../components/CardGrid/CardGrid";
 import Search from "../../components/Search";
 import { useNavigate } from "react-router-dom";
 import styles from "./Sort.module.css";
@@ -34,7 +34,7 @@ export default function SortPage() {
             />
           </div>
           <CardGrid
-            on_select={(idx) => navigate(`/sort/${idx}`)}
+            on_select={(idx) => navigate(`/sort/visualize?id=${idx}`)}
             search_term={search_term}
             algo_data={SORT_DATA}
           />

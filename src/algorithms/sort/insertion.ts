@@ -17,7 +17,7 @@ export class InsertionSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n²",
+			average: "n²",
 			best: "n",
 			worst: "n²",
 		};
@@ -25,7 +25,7 @@ export class InsertionSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -40,7 +40,7 @@ export class InsertionSort implements Algorithm {
 
 			while (j >= 0 && data[j] > key) {
 				on_compare(j);
-				await sleep(delay);
+				await sleep(delay.current);
 
 				data[j + 1] = data[j];
 
@@ -55,7 +55,7 @@ export class InsertionSort implements Algorithm {
 		}
 
 		for (let i = 0; i < len; i++) {
-			await sleep(50);
+			await sleep(2);
 			on_success(i);
 		}
 	}

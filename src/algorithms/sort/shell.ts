@@ -17,7 +17,7 @@ export class ShellSort implements Algorithm {
 
 	runtime(): Runtime {
 		return {
-			avarage: "n¹·⁵",
+			average: "n¹·⁵",
 			best: "n log n",
 			worst: "n²",
 		};
@@ -25,7 +25,7 @@ export class ShellSort implements Algorithm {
 
 	async update<T>(
 		data: T[],
-		delay: number,
+		delay: React.RefObject<number>,
 		on_current: (idx: number) => void,
 		on_compare: (idx: number) => void,
 		on_success: (idx: number) => void,
@@ -42,7 +42,7 @@ export class ShellSort implements Algorithm {
 
 				while (j >= gap && data[j - gap] > tmp) {
 					on_compare(j - gap);
-					await sleep(delay);
+					await sleep(delay.current);
 
 					data[j] = data[j - gap];
 					j -= gap;

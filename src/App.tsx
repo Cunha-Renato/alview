@@ -7,7 +7,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/sort" element={<SortPage />} />
-        <Route path="/sort/:id" element={<SortPageAlgo />} />
+        <Route path="/sort/visualize" element={<SortPageAlgo />} />
       </Routes>
     </BrowserRouter>
   );
